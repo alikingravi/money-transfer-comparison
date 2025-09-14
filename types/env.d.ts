@@ -1,3 +1,5 @@
+import { ENV } from "@/lib/env";
+
 declare namespace NodeJS {
-  interface ProcessEnv extends import("@/lib/env").Env {}
+  interface ProcessEnv extends Env {}
 }

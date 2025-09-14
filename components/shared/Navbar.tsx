@@ -1,10 +1,4 @@
-import {
-  NavigationMenu,
-  NavigationMenuItem,
-  NavigationMenuList,
-} from "@/components/ui/navigation-menu";
 import { ModeToggle } from "@/components/ui/mode-toggle";
-import { Navigation } from "lucide-react";
 
 const Navbar = () => {
   return (

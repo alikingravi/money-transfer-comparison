@@ -28,10 +28,15 @@ export async function GET(req: NextRequest) {
     );
 
     return NextResponse.json(response);
-  } catch (error: any) {
-    console.error("Error fetching comparison data:", error);
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      console.error("Error fetching comparison data:", error.message);
+      return NextResponse.json({ error: error.message }, { status: 500 });
+    }
+
+    console.error("Unknown error fetching comparison data:", error);
     return NextResponse.json(
-      { error: error?.message || "Failed to fetch comparison data" },
+      { error: "Failed to fetch comparison data" },
       { status: 500 },
     );
   }
