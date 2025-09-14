@@ -1,5 +1,3 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
-
 # Money Comparison App
 
 A modern Next.js project to quickly compare currency exchange rates and find the best value for your money.
