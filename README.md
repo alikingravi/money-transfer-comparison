@@ -17,6 +17,7 @@ The app features:
 - Clean UI with TailwindCSS and Shadcn components
 - Real-time currency comparison via Wise API
 - Error handling and loading states using React Query
+- API Data Caching for requests already made using React Query
 - Zod for form schema validation
 
 ---

@@ -18,12 +18,15 @@ import {
   CurrencyFormSchema,
   CurrencyFormValues,
 } from "@/types/currency-form";
-import { ArrowLeftRight } from "lucide-react";
+import { ArrowLeftRight, Loader2 } from "lucide-react";
 import CurrencySelect from "./shared/CurrencySelect";
+import { useIsFetching, useQueryClient } from "@tanstack/react-query";
 
 export const CurrencyComparisonForm: React.FC<CurrencyComparisonFormProps> = ({
   setCurrencyFormValues,
 }) => {
+  const queryClient = useQueryClient();
+
   const form = useForm<CurrencyFormValues>({
     resolver: zodResolver(CurrencyFormSchema) as Resolver<CurrencyFormValues>,
     defaultValues: {
@@ -33,9 +36,22 @@ export const CurrencyComparisonForm: React.FC<CurrencyComparisonFormProps> = ({
     },
   });
 
+  const watchedValues = form.watch();
+
   const onSubmit = (values: CurrencyFormValues) => {
     setCurrencyFormValues(values);
   };
+
+  const queryKey = [
+    "currencyComparison",
+    watchedValues.sourceCurrency,
+    watchedValues.targetCurrency,
+    Number(watchedValues.sendAmount),
+  ];
+
+  const isFetching = useIsFetching({ queryKey }) > 0;
+  const cachedData = queryClient.getQueryData(queryKey);
+  const isCached = !!cachedData;
 
   return (
     <>
@@ -122,13 +138,23 @@ export const CurrencyComparisonForm: React.FC<CurrencyComparisonFormProps> = ({
               </FormItem>
             )}
           />
-
           <Button
             type="submit"
+            disabled={isFetching || isCached}
             className="w-full mt-2 bg-primary text-primary-foreground
-              hover:bg-primary/90 py-6 text-lg font-semibold"
+              hover:bg-primary/90 py-6 text-lg font-semibold flex items-center
+              justify-center gap-2"
           >
-            Compare
+            {isFetching ? (
+              <>
+                <Loader2 className="animate-spin h-5 w-5" />
+                Fetching...
+              </>
+            ) : isCached ? (
+              "Results cached for 5 mins"
+            ) : (
+              "Compare"
+            )}
           </Button>
         </form>
       </Form>
