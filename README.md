@@ -68,3 +68,4 @@ Then open http://localhost:3000 in your browser to view the app.
 - API errors are handled gracefully via server-side wrappers.
 - The choice of frontend testing is **Jest** and **React Testing Library**.  
   However, testing has been omitted for this demo to focus on the core functionality.
+- **Husky pre-commit hooks** and a **CI/CD pipeline** have also been omitted for this demo project.
