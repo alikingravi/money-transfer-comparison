@@ -14,13 +14,11 @@ const axiosInstance: AxiosInstance = axios.create({
 });
 
 axiosInstance.interceptors.response.use(
-  (response: AxiosResponse) => {
-    return response;
-  },
+  (response: AxiosResponse) => response,
   (error: AxiosError) => {
     if (error.response) {
       console.error(
-        `API Error: ${error.response.status} - ${JSON.stringify(error.response.data)}`,
+        `API Error: ${error.response.status} - ${JSON.stringify(error.response.data, null, 2)}`,
       );
     } else if (error.request) {
       console.error("No response from the server", error.request);
