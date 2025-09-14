@@ -24,6 +24,7 @@ export default function CurrencySelect({
     queryKey: ["currencies"],
     queryFn: getCurrencies,
     staleTime: 1000 * 60 * 60 * 24 * 30, // 30 days
+    retry: 0,
   });
 
   if (isLoading) {

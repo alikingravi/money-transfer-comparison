@@ -15,19 +15,7 @@ const axiosInstance: AxiosInstance = axios.create({
 
 axiosInstance.interceptors.response.use(
   (response: AxiosResponse) => response,
-  (error: AxiosError) => {
-    if (error.response) {
-      console.error(
-        `API Error: ${error.response.status} - ${JSON.stringify(error.response.data, null, 2)}`,
-      );
-    } else if (error.request) {
-      console.error("No response from the server", error.request);
-    } else {
-      console.error(`Unexpected error: ${error.message}`);
-    }
-
-    return Promise.reject(error);
-  },
+  (error: AxiosError) => Promise.reject(error),
 );
 
 export const apiGet = async <T>(

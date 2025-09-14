@@ -27,7 +27,8 @@ export const CurrencyComparisonResult: React.FC<CurrencyFormValues> = ({
     queryFn: () =>
       getCurrencyComparison({ sendAmount, sourceCurrency, targetCurrency }),
     enabled: !!sendAmount && !!sourceCurrency && !!targetCurrency,
-    staleTime: 1000 * 60,
+    staleTime: 5000 * 60, // 5 minutes
+    retry: 0,
   });
 
   if (isLoading) {
